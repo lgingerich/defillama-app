@@ -266,8 +266,9 @@ export const navLinks: ILinks = {
 	},
 	Volumes: {
 		main: [
-			{ name: 'Overview', path: '/dexs' },
-			{ name: 'Chains', path: '/dexs/chains' },
+			{ name: 'Overview', path: '/volumes' },
+			{ name: 'Chains', path: '/volumes/chains' },
+			{ name: 'Dexs', path: '/dexs' },
 			{ name: 'Derivatives', path: '/derivatives' },
 			{ name: 'Options', path: '/options' }
 		],
