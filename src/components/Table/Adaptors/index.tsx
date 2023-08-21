@@ -29,6 +29,8 @@ const columnsOptions = (type, allChains) => [
 ]
 
 export function OverviewTable({ data, type, allChains, categories, selectedCategories }) {
+	console.log('OverviewTable type prop:', type);
+
 	const optionsKey = 'table-columns-' + type
 
 	const [sorting, setSorting] = React.useState<SortingState>([{ desc: true, id: 'total24h' }])

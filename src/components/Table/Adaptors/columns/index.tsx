@@ -18,9 +18,15 @@ import {
 } from './common'
 
 export const getColumnsByType = (type: string, allChains?: boolean) => {
+	console.log('Type:', type);
+
 	switch (type) {
-		case 'dexs':
+		// case 'dexs':
+		// 	return volumesColumns(allChains)
+		case 'volumes':
 			return volumesColumns(allChains)
+		case 'dexs':
+			return dexsColumns(allChains)
 		case 'fees':
 			return feesColumns(allChains)
 		case 'incentives':
@@ -58,8 +64,10 @@ export const getColumnsOrdernSizeByType = (type: string) => {
 
 export const volumesColumns = (allChains?: boolean): ColumnDef<IDexsRow>[] =>
 	[
+		// NameColumn('volumes', allChains),
 		NameColumn('dexs', allChains),
-		allChains ? undefined : ChainsColumn('dexs'),
+		allChains ? undefined : ChainsColumn('volumes'),
+		allChains ? undefined : CategoryColumn,
 		// Change1dColumn,
 		// Change7dColumn,
 		// Change1mColumn,
@@ -67,6 +75,19 @@ export const volumesColumns = (allChains?: boolean): ColumnDef<IDexsRow>[] =>
 		Total24hColumn('Volume', undefined, `Yesterday's volume, updated daily at 00:00UTC`),
 		Total24hColumn('Volume', 'total7d', `Cumulative last 7d volume`, undefined, 'Volume (7d)'),
 		TVLColumn,
+		TotalAllTimeColumn('volume'),
+		allChains ? undefined : VolumeTVLColumn,
+		DominanceColumn
+	].filter((c) => c !== undefined)
+
+	export const dexsColumns = (allChains?: boolean): ColumnDef<IDexsRow>[] =>
+	[
+		NameColumn('dexs', allChains),
+		allChains ? undefined : ChainsColumn('dexs'),
+		Change1dColumn,
+		Change7dColumn,
+		Change1mColumn,
+		Total24hColumn('Volume', undefined, `Yesterday's volume, updated daily at 00:00UTC`),
 		TotalAllTimeColumn('volume'),
 		allChains ? undefined : VolumeTVLColumn,
 		DominanceColumn
@@ -154,6 +175,7 @@ export const volumesTableColumnOrders = formatColumnOrder({
 		'displayName',
 		'name',
 		'chains',
+		'category',
 		'change_7dover7d',
 		'total24h',
 		'total7d',
@@ -169,6 +191,7 @@ export const volumesTableColumnOrders = formatColumnOrder({
 		'displayName',
 		'name',
 		'chains',
+		'category',
 		'change_7dover7d',
 		'change_1d',
 		'change_7d',
@@ -186,6 +209,7 @@ export const volumesColumnSizes = {
 	0: {
 		name: 140,
 		chains: 140,
+		category: 140,
 		change_1d: 140,
 		change_7d: 140,
 		change_1m: 140,
@@ -196,6 +220,7 @@ export const volumesColumnSizes = {
 	600: {
 		name: 200,
 		chains: 120,
+		category: 140,
 		change_1d: 140,
 		change_7d: 140,
 		change_1m: 140,
@@ -206,6 +231,7 @@ export const volumesColumnSizes = {
 	900: {
 		name: 240,
 		chains: 140,
+		category: 140,
 		change_1d: 140,
 		change_7d: 140,
 		change_1m: 140,

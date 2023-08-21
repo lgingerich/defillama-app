@@ -2,6 +2,7 @@ import { IJSON } from '~/api/categories/adaptors/types'
 
 interface IDexs {
 	name: string
+	category: string
 	displayName?: string
 	chains: Array<string>
 	change_1d: number

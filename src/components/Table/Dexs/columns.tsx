@@ -49,6 +49,16 @@ export const dexsColumn: ColumnDef<IDexsRow>[] = [
 		size: 140
 	},
 	{
+		header: 'Category',
+		accessorKey: 'category',
+		enableSorting: false,
+		cell: ({ getValue }) => (getValue() ? <CustomLink href={`/protocols/${getValue()}`}>{getValue()}</CustomLink> : ''),
+		size: 140,
+		meta: {
+			align: 'end'
+		}
+	},
+	{
 		header: '1d Change',
 		accessorKey: 'change_1d',
 		cell: (info) => <>{formattedPercent(info.getValue())}</>,
@@ -185,14 +195,15 @@ export const volumesByChainsColumns: ColumnDef<IDexsRow>[] = [
 // key: min width of window/screen
 // values: table columns order
 export const dexsTableColumnOrders = formatColumnOrder({
-	0: ['name', 'totalVolume24h', 'change_7d', 'chains', 'change_1d', 'change_1m', 'volumetvl', 'dominance'],
-	900: ['name', 'chains', 'change_1d', 'change_7d', 'change_1m', 'totalVolume24h', 'volumetvl', 'dominance']
+	0: ['name', 'totalVolume24h', 'change_7d', 'chains', 'category', 'change_1d', 'change_1m', 'volumetvl', 'dominance'],
+	900: ['name', 'chains', 'category', 'change_1d', 'change_7d', 'change_1m', 'totalVolume24h', 'volumetvl', 'dominance']
 })
 
 export const columnSizes = {
 	0: {
 		name: 140,
 		chains: 140,
+		category: 140,
 		change_1d: 140,
 		change_7d: 140,
 		change_1m: 140,
@@ -203,6 +214,7 @@ export const columnSizes = {
 	600: {
 		name: 200,
 		chains: 120,
+		category: 140,
 		change_1d: 140,
 		change_7d: 140,
 		change_1m: 140,
@@ -213,6 +225,7 @@ export const columnSizes = {
 	900: {
 		name: 240,
 		chains: 140,
+		category: 140,
 		change_1d: 140,
 		change_7d: 140,
 		change_1m: 140,
